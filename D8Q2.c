@@ -1,9 +1,20 @@
-void reverseString(char* s, int n){
-    int l=0,r=n-1;
-    while(l<r){
-        char t=s[l];
-        s[l]=s[r];
-        s[r]=t;
-        l++; r--;
-    }
+#include <stdio.h>
+#include <stdbool.h>
+
+bool isPowerOfTwo(int n) {
+    if (n <= 0)
+        return false;
+    return (n & (n - 1)) == 0;
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    if (isPowerOfTwo(n))
+        printf("true");
+    else
+        printf("false");
+
+    return 0;
 }
