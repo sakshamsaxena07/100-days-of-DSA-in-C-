@@ -1,24 +1,26 @@
 #include <stdio.h>
+#include <string.h>
 
-int main(){
-    int n,m;
-    scanf("%d",&n);
-    int a[n];
-    for(int i=0;i<n;i++)
-        scanf("%d",&a[i]);
+int main() {
+    char s[100];
+    scanf("%s", s);
 
-    scanf("%d",&m);
-    int b[m];
-    for(int i=0;i<m;i++)
-        scanf("%d",&b[i]);
+    int left = 0, right = strlen(s) - 1;
+    int flag = 1;
 
-    for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            if(a[i]==b[j]){
-                printf("%d ",a[i]);
-                b[j]=-1;
-                break;
-            }
+    while (left < right) {
+        if (s[left] != s[right]) {
+            flag = 0;
+            break;
         }
+        left++;
+        right--;
     }
+
+    if (flag)
+        printf("YES");
+    else
+        printf("NO");
+
+    return 0;
 }
