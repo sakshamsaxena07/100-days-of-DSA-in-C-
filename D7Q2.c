@@ -1,13 +1,21 @@
 #include <stdio.h>
 
-int power(int a,int b){
-    if(b==0)
-        return 1;
-    return a*power(a,b-1);
+int fib(int n) {
+    if (n <= 1)
+        return n;
+
+    int a = 0, b = 1, c;
+    for (int i = 2; i <= n; i++) {
+        c = a + b;
+        a = b;
+        b = c;
+    }
+    return b;
 }
 
-int main(){
-    int a,b;
-    scanf("%d%d",&a,&b);
-    printf("%d",power(a,b));
+int main() {
+    int n;
+    scanf("%d", &n);
+    printf("%d", fib(n));
+    return 0;
 }
