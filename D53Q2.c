@@ -1,42 +1,35 @@
-#include <stdio.h>
-#include <stdlib.h>
+struct Node* queue[1000];
 
-#define MAX 1000
-
-struct Node {
-    int data;
-    struct Node *left, *right;
-};
-
-struct Node* newNode(int data) {
-    struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
-    temp->data = data;
-    temp->left = temp->right = NULL;
-    return temp;
-}
-
-// Level Order Traversal
-void levelOrder(struct Node* root) {
+void zigzagLevelOrder(struct Node* root) {
     if (!root) return;
 
-    struct Node* queue[MAX];
     int front = 0, rear = 0;
-
     queue[rear++] = root;
+
+    int leftToRight = 1;
 
     while (front < rear) {
         int size = rear - front;
+        int temp[size];
 
         for (int i = 0; i < size; i++) {
             struct Node* curr = queue[front++];
-            printf("%d ", curr->data);
 
-            if (curr->left)
-                queue[rear++] = curr->left;
+            int index = leftToRight ? i : (size - 1 - i);
+            temp[index] = curr->data;
 
-            if (curr->right)
-                queue[rear++] = curr->right;
+            if (curr->left) queue[rear++] = curr->left;
+            if (curr->right) queue[rear++] = curr->right;
         }
-        printf("\n");
+
+        // Print as list format
+        printf("[");
+        for (int i = 0; i < size; i++) {
+            printf("%d", temp[i]);
+            if (i < size - 1) printf(", ");
+        }
+        printf("]\n");
+
+        leftToRight = !leftToRight;
     }
 }
